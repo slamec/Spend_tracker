@@ -1,0 +1,2 @@
+#spend tracker should track users spend. The spend should be written into DB (pickle). 
+#do categorization and visualion in dasboard. In the future will be run on local server as web app.  
