@@ -7,6 +7,7 @@ import os
 import datetime
 import currencies
 
+#get current directory 
 cwd = os.path.dirname(__file__)
 db_path = os.path.join(cwd, 'example.db')
 
