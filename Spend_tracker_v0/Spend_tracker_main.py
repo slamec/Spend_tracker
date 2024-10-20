@@ -26,25 +26,25 @@ def insert_data(db_name: str, table_name: str, category: str,
     if not isinstance(date, str):
         raise TypeError('date must be a string')
 
-    #get current working directory 
+    # get current working directory 
     cwd = os.path.dirname(__file__)
     db_path = os.path.join(cwd, db_name + '.db')
 
-    #connect to the database
+    # connect to the database
     conn = sqlite3.connect(db_path)
     c = conn.cursor()
     
-    #create a table, use DROP to delete a table
+    # create a table, use DROP to delete a table
     c.execute(f'''CREATE TABLE IF NOT EXISTS {table_name}
                 (id INTEGER PRIMARY KEY, category TEXT, amount INTEGER, currency TEXT, date TEXT)''')
     conn.commit()
 
-    #insert data
+    # insert data
     c.execute(f'''INSERT INTO {table_name} (category, amount, currency, date) VALUES (?, ?, ?, ?)''', 
               (category, amount, currency, date))
     conn.commit()
 
-    #close connection
+    # close connection
     conn.close()
 
 insert_data(db_name='spend', table_name='spends', category='Food', amount=1200, currency='CZK', date='19/10/2024')
