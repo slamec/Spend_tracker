@@ -7,9 +7,24 @@ import os
 import datetime
 import currencies
 
-def insert_data(db_name, table_name, category, amount, currency, date):
+def insert_data(db_name: str, table_name: str, category: str, 
+                amount: int, currency: str, date: str):
     '''Create a database and table, name of db and table name needed. 
         Then provide values for each variable.'''
+         
+    # Validate data types
+    if not isinstance(db_name, str):
+        raise TypeError('db_name must be a string')
+    if not isinstance(table_name, str):
+        raise TypeError('table_name must be a string')
+    if not isinstance(category, str):
+        raise TypeError('category must be a string')
+    if not isinstance(amount, int):
+        raise TypeError('amount must be an integer')
+    if not isinstance(currency, str):
+        raise TypeError('currency must be a string')
+    if not isinstance(date, str):
+        raise TypeError('date must be a string')
 
     #get current working directory 
     cwd = os.path.dirname(__file__)
@@ -32,7 +47,7 @@ def insert_data(db_name, table_name, category, amount, currency, date):
     #close connection
     conn.close()
 
-insert_data(db_name='spend', table_name='spends', category='Car', amount=8000, currency='CZK', date='10/10/2024')
+insert_data(db_name='spend', table_name='spends', category='Food', amount=1200, currency='CZK', date='19/10/2024')
 
 # c.execute("SELECT * FROM spend")
 # print(c.fetchall())
