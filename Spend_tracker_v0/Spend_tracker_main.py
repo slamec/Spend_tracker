@@ -47,10 +47,37 @@ def insert_data(db_name: str, table_name: str, category: str,
     # close connection
     conn.close()
 
-insert_data(db_name='spend', table_name='spends', category='Food', amount=1200, currency='CZK', date='19/10/2024')
+# insert_data(db_name='spend', table_name='spends', category='Food', amount=1200, currency='CZK', date='19/10/2024')
 
-# c.execute("SELECT * FROM spend")
-# print(c.fetchall())
+def update_data(db_name: str, table_name: str, column_name_1: str, value_1, 
+                column_name_2: str, value_2: str):
+    '''Update a database and table, name of db and table name needed. 
+        Then provide values for each variable.'''
+         
+    # Validate data types
+    if not isinstance(db_name, str):
+        raise TypeError('db_name must be a string')
+    if not isinstance(table_name, str):
+        raise TypeError('table_name must be a string')
+
+    # get current working directory 
+    cwd = os.path.dirname(__file__)
+    db_path = os.path.join(cwd, db_name + '.db')
+
+    # connect to the database
+    conn = sqlite3.connect(db_path)
+    c = conn.cursor()
+    
+    # update data
+    c.execute(f'''UPDATE {table_name} SET {column_name_1} = ? WHERE {column_name_2} = ?''',
+              (value_1, value_2)) 
+    conn.commit()
+
+    # close connection
+    conn.close()
+
+update_data(db_name='spend', table_name='spends', column_name_1='amount', value_1=9000, 
+            column_name_2='category', value_2='Car')
 
 # #update data
 # c.execute("UPDATE users SET age = 31 WHERE name = 'Alice'")
@@ -59,6 +86,9 @@ insert_data(db_name='spend', table_name='spends', category='Food', amount=1200, 
 # #delete data
 # c.execute("DELETE FROM users WHERE name = 'Bob'")
 # conn.commit()
+
+# c.execute("SELECT * FROM spend")
+# print(c.fetchall())
 
 
 
