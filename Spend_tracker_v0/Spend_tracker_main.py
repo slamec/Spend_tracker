@@ -47,10 +47,11 @@ def insert_data(db_name: str, table_name: str, category: str,
     # close connection
     conn.close()
 
-# insert_data(db_name='spend', table_name='spends', category='Food', amount=1200, currency='CZK', date='19/10/2024')
+insert_data(db_name='spend', table_name='spends', category='wife', amount=4400, 
+            currency='CZK', date='19/10/2024')
 
 def update_data(db_name: str, table_name: str, column_name_1: str, value_1, 
-                column_name_2: str, value_2: str):
+                column_name_2: str, value_2):
     '''Update a database and table, name of db and table name needed. 
         Then provide values for each variable.'''
          
@@ -76,19 +77,38 @@ def update_data(db_name: str, table_name: str, column_name_1: str, value_1,
     # close connection
     conn.close()
 
-update_data(db_name='spend', table_name='spends', column_name_1='amount', value_1=9000, 
-            column_name_2='category', value_2='Car')
-
-# #update data
-# c.execute("UPDATE users SET age = 31 WHERE name = 'Alice'")
-# conn.commit()
-
-# #delete data
-# c.execute("DELETE FROM users WHERE name = 'Bob'")
-# conn.commit()
-
-# c.execute("SELECT * FROM spend")
-# print(c.fetchall())
+# update_data(db_name='spend', table_name='spends', column_name_1='amount', value_1=9000, 
+#             column_name_2='category', value_2='Car')
 
 
+def delete_data(db_name: str, table_name: str, column_name_1: str, value_1, 
+                column_name_2: str, value_2):
+    '''Delete a table in a database, name of db and table name needed. 
+        Then provide values for each variable.'''
+         
+    # Validate data types
+    if not isinstance(db_name, str):
+
+        raise TypeError('db_name must be a string')
+    if not isinstance(table_name, str):
+        raise TypeError('table_name must be a string')
+
+    # get current working directory 
+    cwd = os.path.dirname(__file__)
+    db_path = os.path.join(cwd, db_name + '.db')
+
+    # connect to the database
+    conn = sqlite3.connect(db_path)
+    c = conn.cursor()
+    
+    # update data
+    c.execute(f'''DELETE FROM {table_name} WHERE {column_name_1} = ? AND {column_name_2} = ?''',
+              (value_1, value_2)) 
+    conn.commit()
+
+    # close connection
+    conn.close()
+
+# delete_data(db_name='spend', table_name='spends', column_name_1='category', value_1='Car', 
+#             column_name_2='amount', value_2=9900)
 
