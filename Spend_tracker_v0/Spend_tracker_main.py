@@ -4,8 +4,6 @@
 
 import sqlite3
 import os
-import datetime
-import currencies
 
 def insert_data(db_name: str, table_name: str, category: str, 
                 amount: int, currency: str, date: str):
