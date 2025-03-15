@@ -45,8 +45,10 @@ def insert_data(db_name: str, table_name: str, category: str,
     # close connection
     conn.close()
 
-insert_data(db_name='spend', table_name='spends', category='wife', amount=4400, 
-            currency='CZK', date='19/10/2024')
+# def new_func(insert_data):
+#     insert_data(db_name='spend', table_name='spends', category='wife', amount=4400, 
+#             currency='CZK', date='19/10/2024')
+
 
 def update_data(db_name: str, table_name: str, column_name_1: str, value_1, 
                 column_name_2: str, value_2):
@@ -107,6 +109,6 @@ def delete_data(db_name: str, table_name: str, column_name_1: str, value_1,
     # close connection
     conn.close()
 
-# delete_data(db_name='spend', table_name='spends', column_name_1='category', value_1='Car', 
-#             column_name_2='amount', value_2=9900)
+delete_data(db_name='spend', table_name='spends', column_name_1='category', value_1='wife', 
+             column_name_2='amount', value_2=4400)
 
